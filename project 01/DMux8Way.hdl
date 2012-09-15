@@ -1,0 +1,49 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/01/DMux8Way.hdl
+
+/**
+ * 8-way demultiplexor.  
+ * {a,b,c,d,e,f,g,h} = {in,0,0,0,0,0,0,0} if sel==000
+ *                     {0,in,0,0,0,0,0,0} if sel==001
+ *                     etc.
+ *                     {0,0,0,0,0,0,0,in} if sel==111
+ */
+
+
+CHIP DMux8Way {
+    IN in, sel[3];
+    OUT a, b, c, d, e, f, g, h;
+
+    PARTS:
+    // Put your code here.
+    Not(in=sel[0],out=notsel0);
+    Not(in=sel[1],out=notsel1);
+    Not(in=sel[2],out=notsel2);
+
+    And(a=notsel0,b=notsel1,out=tmpval00);
+    And(a=sel[0],b=notsel1,out=tmpval01);
+    And(a=sel[1],b=notsel0,out=tmpval10);
+    And(a=sel[0],b=sel[1],out=tmpval11);
+    
+    And(a=tmpval00,b=notsel2,out=val000);
+    And(a=tmpval01,b=notsel2,out=val001);
+    And(a=tmpval10,b=notsel2,out=val010);
+    And(a=tmpval11,b=notsel2,out=val011);
+    
+    And(a=tmpval00,b=sel[2],out=val100);
+    And(a=tmpval01,b=sel[2],out=val101);
+    And(a=tmpval10,b=sel[2],out=val110);
+    And(a=tmpval11,b=sel[2],out=val111);
+
+    And(a=in,b=val000,out=a);
+    And(a=in,b=val001,out=b);
+    And(a=in,b=val010,out=c);
+    And(a=in,b=val011,out=d);
+    And(a=in,b=val100,out=e);
+    And(a=in,b=val101,out=f);
+    And(a=in,b=val110,out=g);
+    And(a=in,b=val111,out=h);
+   
+}

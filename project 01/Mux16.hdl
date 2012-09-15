@@ -1,0 +1,65 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/01/Mux16.hdl
+
+/**
+ * 16 bit multiplexor. If sel==1 then out=b else out=a.
+ */
+
+CHIP Mux16 {
+    IN a[16], b[16], sel;
+    OUT out[16];
+
+    PARTS:
+    // Put your code here.
+    Not(in=sel,out=notsel);
+    And(a=a[0],b=notsel,out=wc10);
+    And(a=a[1],b=notsel,out=wc11);
+    And(a=a[2],b=notsel,out=wc12);
+    And(a=a[3],b=notsel,out=wc13);
+    And(a=a[4],b=notsel,out=wc14);
+    And(a=a[5],b=notsel,out=wc15);
+    And(a=a[6],b=notsel,out=wc16);
+    And(a=a[7],b=notsel,out=wc17);
+    And(a=a[8],b=notsel,out=wc18);
+    And(a=a[9],b=notsel,out=wc19);
+    And(a=a[10],b=notsel,out=wc110);
+    And(a=a[11],b=notsel,out=wc111);
+    And(a=a[12],b=notsel,out=wc112);
+    And(a=a[13],b=notsel,out=wc113);
+    And(a=a[14],b=notsel,out=wc114);
+    And(a=a[15],b=notsel,out=wc115);
+    And(a=b[0],b=sel,out=wc20);
+    And(a=b[1],b=sel,out=wc21);
+    And(a=b[2],b=sel,out=wc22);
+    And(a=b[3],b=sel,out=wc23);
+    And(a=b[4],b=sel,out=wc24);
+    And(a=b[5],b=sel,out=wc25);
+    And(a=b[6],b=sel,out=wc26);
+    And(a=b[7],b=sel,out=wc27);
+    And(a=b[8],b=sel,out=wc28);
+    And(a=b[9],b=sel,out=wc29);
+    And(a=b[10],b=sel,out=wc210);
+    And(a=b[11],b=sel,out=wc211);
+    And(a=b[12],b=sel,out=wc212);
+    And(a=b[13],b=sel,out=wc213);
+    And(a=b[14],b=sel,out=wc214);
+    And(a=b[15],b=sel,out=wc215);
+    Xor(a=wc10,b=wc20,out=out[0]);
+    Xor(a=wc11,b=wc21,out=out[1]);
+    Xor(a=wc12,b=wc22,out=out[2]);
+    Xor(a=wc13,b=wc23,out=out[3]);
+    Xor(a=wc14,b=wc24,out=out[4]);
+    Xor(a=wc15,b=wc25,out=out[5]);
+    Xor(a=wc16,b=wc26,out=out[6]);
+    Xor(a=wc17,b=wc27,out=out[7]);
+    Xor(a=wc18,b=wc28,out=out[8]);
+    Xor(a=wc19,b=wc29,out=out[9]);
+    Xor(a=wc110,b=wc210,out=out[10]);
+    Xor(a=wc111,b=wc211,out=out[11]);
+    Xor(a=wc112,b=wc212,out=out[12]);
+    Xor(a=wc113,b=wc213,out=out[13]);
+    Xor(a=wc114,b=wc214,out=out[14]);
+    Xor(a=wc115,b=wc215,out=out[15]);
+}
